@@ -19,7 +19,7 @@ app.use(
     // credentials: true,
     origin: [
       process.env.NETLIFY_URL || "http://localhost:3000",
-      "https://a5--superb-cupcake-d547e1.netlify.app/",
+      "https://a5--superb-cupcake-d547e1.netlify.app",
     ],
   })
 );
