@@ -1,12 +1,13 @@
 import Database from "../Database/index.js";
+import model from "./model.js";
+
 export function findAllCourses() {
-  return Database.courses;
+  return  model.find();
 }
 
 export function createCourse(course) {
-  const newCourse = { ...course, _id: Date.now().toString() };
-  Database.courses = [...Database.courses, newCourse];
-  return newCourse;
+  delete course._id;
+  return model.create(course);
 }
 
 
