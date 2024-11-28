@@ -25,18 +25,32 @@ app.use(
   })
 );
 
+// const sessionOptions = {
+//   secret: process.env.SESSION_SECRET || "kanbas",
+//   resave: false,
+//   saveUninitialized: false,
+// };
+// if (process.env.NODE_ENV !== "development") {
+//   sessionOptions.proxy = true;
+//   sessionOptions.cookie = {
+//     sameSite: "none",
+//     secure: true,
+//     domain: process.env.NODE_SERVER_DOMAIN,
+//   };
+// }
+
 const sessionOptions = {
-  secret: process.env.SESSION_SECRET || "kanbas",
+  secret: 'sessionSecret', // Replace with a strong secret key
   resave: false,
-  saveUninitialized: false,
-};
-if (process.env.NODE_ENV !== "development") {
-  sessionOptions.proxy = true;
-  sessionOptions.cookie = {
-    sameSite: "none",
-    secure: true,
-    domain: process.env.NODE_SERVER_DOMAIN,
-  };
+  httpOnly: true,
+  saveUninitialized: true,
+
+  cookie: {
+    domain: 'localhost',
+    path: '/',
+    maxAge: 5000 * 60, //5 mnt
+    sameSite: 'lax' // Please use your own value based on requirements.
+  }
 }
 app.use(session(sessionOptions));
 

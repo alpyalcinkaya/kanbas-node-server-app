@@ -13,6 +13,7 @@ export function findQuizzesForCourse(courseId) {
   return quizzes.filter((quiz) => quiz.course === courseId);
 }
 
+
 // Update an existing quiz by its ID
 export function updateQuiz(quizId, quizUpdates) {
   const { quizzes } = Database;
@@ -39,3 +40,21 @@ export function deleteQuiz(quizId) {
     return false; // Quiz not found
   }
 }
+
+
+export const findQuizById = (courseId, quizId) => {
+  const { quizzes } = Database;
+
+  // Find the quiz by its ID and also make sure it belongs to the given course
+  const quiz = quizzes.find((quiz) => quiz._id === quizId && quiz.course === courseId);
+
+  if (!quiz) {
+    throw new Error(`Quiz with ID ${quizId} not found in course ${courseId}`);
+  }
+
+  return quiz;
+};
+
+
+
+
