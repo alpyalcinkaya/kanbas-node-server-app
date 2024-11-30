@@ -1,6 +1,6 @@
 
 // Each question has its unique ID, the quiz ID or quiz it is associated with, 
-// Points it is worth, The question/description, the answer(s)
+// Points it is worth, The question/description, an array of options, the answer or array of answers with the value (answer) and explanation for answer. 
 // can add route to quizzes to retrieve quizzes by quizId. So get each question that has the ID of the current quiz. 
 export default [
     {
