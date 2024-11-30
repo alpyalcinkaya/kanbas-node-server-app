@@ -2,7 +2,7 @@
 import * as assignmentsDao from "./dao.js";
 
 export default function AssignmentRoutes(app) {
-  // Create a new assignment for a course
+
    // Create a new assignment for a course
    app.post("/api/courses/:courseId/assignments", (req, res) => {
     const { courseId } = req.params; // Get the course ID from URL parameters

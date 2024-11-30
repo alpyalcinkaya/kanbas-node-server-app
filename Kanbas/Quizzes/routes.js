@@ -1,3 +1,4 @@
+import quizzes from "../Database/quizzes.js";
 import * as dao from "./dao.js";
 
 export default function QuizRoutes(app) {
@@ -19,6 +20,8 @@ export default function QuizRoutes(app) {
     res.json(quizzes);
   });
 
+  
+
   // Update a quiz
   app.put("/api/quizzes/:quizId", (req, res) => {
     const { quizId } = req.params;
@@ -37,4 +40,36 @@ export default function QuizRoutes(app) {
     const status = dao.deleteQuiz(quizId);
     res.send({ success: status });
   });
+
+// Route for fetching a quiz by Id to edit it. 
+app.get("/api/courses/:courseId/quizzes/:quizId/edit", (req, res) => {
+  const { courseId, quizId } = req.params;
+  console.log("Server - Fetch Quiz by ID Request: Edit", courseId, quizId);
+  
+  try {
+    const quiz = dao.findQuizById(courseId, quizId);
+    res.json(quiz);
+  } catch (error) {
+    console.error("Server - Quiz not found:", error.message);
+    res.status(404).send({ error: error.message });
+  }
+});
+
+
+// Route for getting a quiz to preview it
+app.get("/api/courses/:courseId/quizzes/:quizId/preview", (req, res) => {
+  const { courseId, quizId } = req.params;
+  console.log("Server - Fetch Quiz by ID Request: Preview ", courseId, quizId);
+  
+  try {
+    const quiz = dao.findQuizById(courseId, quizId);
+    res.json(quiz);
+  } catch (error) {
+    console.error("Server - Quiz not found:", error.message);
+    res.status(404).send({ error: error.message });
+  }
+});
+
+  
+  
 }
