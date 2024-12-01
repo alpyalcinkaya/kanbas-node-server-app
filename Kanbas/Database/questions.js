@@ -95,6 +95,102 @@ export default [
             { "value": "a and b", "explanation": "a and b is correct because..."}, 
         ],
          "type": "multi-choice"
+    },
+
+
+///////////////////////////////////////////// Class 2
+    {
+        "_id": 9,
+        "quizId": 102,
+        "points": 20,
+        "question": "This is a test answer: False or No",
+        "options": [true, false],
+        "answer": [
+            { "value": false, "explanation": "False is correct because..." },
+        ],
+        "type": "True/False"
+
+    }, 
+    {
+        "_id": 10,
+        "quizId": 102,
+        "points": 20,
+        "question": "This is a test answer: True or Yes",
+        "options": [true, false],
+        "answer": [
+            { "value": true, "explanation": "true is correct because..." },
+        ],
+          "type": "True/False"
+    },
+    {
+        "_id": 11,
+        "quizId": 102,
+        "points": 20,
+        "question": "This is a test, answer: 2",
+        "options": [1, 2],
+        "answer": [
+            { "value": 2, "explanation": "2 is correct because..." },
+        ],
+        "answer": 1,
+          "type": "Fill in the blank"
+    },
+    {
+        "_id": 12,
+        "quizId": 102,
+        "points": 20,
+        "question": "This is a test, answer 3",
+        "options": ["3", "4"],
+        "answer": [
+            { "value": "3", "explanation": "3 is correct because..." },
+        ],
+        "type": "Fill in the blank"
+    },
+    {
+        "_id": 13,
+        "quizId": 102,
+        "points": 20,
+        "question": "This is a test, answer: c",
+        "options": ["c", "d"],
+        "answer": [
+            { "value": "c", "explanation": "c is correct because..." },
+        ],
+        "type": "multi-choice"
+    },
+    {
+        "_id": 14,
+        "quizId": 102,
+        "points": 20,
+        "question": "This is a test, answer: d",
+        "options": ["c", "d"],
+        "answer": [
+            { "value": "d", "explanation": "d is correct because..." },
+        ],
+         "type": "multi-choice"
+    },
+    {
+        "_id": 15,
+        "quizId": 102,
+        "points": 20,
+        "question": "This is a test, answer : e and f",
+       "options": ["e", "d"],
+        "answer": [
+            { "value": "a", "explanation": "a is correct because..."}, 
+            { "value": "b", "explanation": "b is correct because..."
+            }
+        ],
+         "type": "multi-choice"
+    },
+
+    {
+        "_id": 16,
+        "quizId": 102,
+        "points": 29,
+        "question": "This is a test, answer : e and f, only the last option",
+       "options": ["a", "b", "e and f"],
+        "answer": [
+            { "value": "e and f", "explanation": "e and f is correct because..."}, 
+        ],
+         "type": "multi-choice"
     }
 
     
