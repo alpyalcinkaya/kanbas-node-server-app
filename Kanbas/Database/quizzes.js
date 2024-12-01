@@ -20,7 +20,8 @@ export default[
       "assignmentGroup": "QUIZZES",
       "submissionType": "ONLINE",
       "quizType": "Graded Quiz",
-      "untilDate": "2024-12-01"
+      "untilDate": "2024-12-01",
+      "showCorrectAnswers": false
 
     },
     {
