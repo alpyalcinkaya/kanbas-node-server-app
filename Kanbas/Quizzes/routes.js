@@ -1,5 +1,5 @@
 import quizzes from "../Database/quizzes.js";
-import * as dao from "./dao.js";
+import * as quizzesDao from "./dao.js";
 
 export default function QuizRoutes(app) {
   // Create a quiz
@@ -8,26 +8,49 @@ export default function QuizRoutes(app) {
     const quiz = {
       ...req.body,
       course: courseId,
+      questionIds: [],
     };
-    const newQuiz = dao.createQuiz(quiz);
+    const newQuiz = quizzesDao.createQuiz(quiz);
     res.send(newQuiz);
   });
 
   // Retrieve quizzes for a course
   app.get("/api/courses/:courseId/quizzes", (req, res) => {
     const { courseId } = req.params;
-    const quizzes = dao.findQuizzesForCourse(courseId);
+    const quizzes = quizzesDao.findQuizzesForCourse(courseId);
     res.json(quizzes);
   });
 
-  
+  // Fetch a quiz by Id to edit it
+  app.get("/api/courses/:courseId/quizzes/:quizId/edit", (req, res) => {
+    const { courseId, quizId } = req.params;
+    try {
+      const quiz = quizzesDao.findQuizById(courseId, quizId);
+      res.json(quiz);
+    } catch (error) {
+      console.error("Server - Quiz not found:", error.message);
+      res.status(404).send({ error: error.message });
+    }
+  });
+
+  // Fetch a quiz to preview it
+  app.get("/api/courses/:courseId/quizzes/:quizId/preview", (req, res) => {
+    const { courseId, quizId } = req.params;
+    try {
+      const quiz = quizzesDao.findQuizById(courseId, quizId);
+      res.json(quiz);
+    } catch (error) {
+      console.error("Server - Quiz not found:", error.message);
+      res.status(404).send({ error: error.message });
+    }
+  });
 
   // Update a quiz
   app.put("/api/quizzes/:quizId", (req, res) => {
     const { quizId } = req.params;
     const quizUpdates = req.body;
     try {
-      const updatedQuiz = dao.updateQuiz(quizId, quizUpdates);
+      const updatedQuiz = quizzesDao.updateQuiz(quizId, quizUpdates);
       res.send(updatedQuiz);
     } catch (error) {
       res.status(404).send({ error: error.message });
@@ -37,39 +60,19 @@ export default function QuizRoutes(app) {
   // Delete a quiz
   app.delete("/api/quizzes/:quizId", (req, res) => {
     const { quizId } = req.params;
-    const status = dao.deleteQuiz(quizId);
+    const status = quizzesDao.deleteQuiz(quizId);
     res.send({ success: status });
   });
 
-// Route for fetching a quiz by Id to edit it. 
-app.get("/api/courses/:courseId/quizzes/:quizId/edit", (req, res) => {
-  const { courseId, quizId } = req.params;
-  console.log("Server - Fetch Quiz by ID Request: Edit", courseId, quizId);
-  
-  try {
-    const quiz = dao.findQuizById(courseId, quizId);
-    res.json(quiz);
-  } catch (error) {
-    console.error("Server - Quiz not found:", error.message);
-    res.status(404).send({ error: error.message });
-  }
-});
-
-
-// Route for getting a quiz to preview it
-app.get("/api/courses/:courseId/quizzes/:quizId/preview", (req, res) => {
-  const { courseId, quizId } = req.params;
-  console.log("Server - Fetch Quiz by ID Request: Preview ", courseId, quizId);
-  
-  try {
-    const quiz = dao.findQuizById(courseId, quizId);
-    res.json(quiz);
-  } catch (error) {
-    console.error("Server - Quiz not found:", error.message);
-    res.status(404).send({ error: error.message });
-  }
-});
-
-  
-  
+  // Associate a question with a quiz
+  app.post("/api/quizzes/:quizId/questions/:questionId", (req, res) => {
+    const { quizId, questionId } = req.params;
+    try {
+      const quiz = quizzesDao.addQuestionToQuiz(quizId, questionId);
+      res.status(200).json(quiz);
+    } catch (error) {
+      console.error("Error adding question to quiz:", error.message);
+      res.status(500).send({ error: error.message });
+    }
+  });
 }
