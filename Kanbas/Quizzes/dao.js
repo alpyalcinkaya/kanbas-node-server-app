@@ -1,5 +1,4 @@
 import Database from "../Database/index.js";
-// quizzesDao.js
 
 
 import { findQuestionById } from "../Questions/dao.js";
@@ -53,15 +52,19 @@ export const deleteQuiz = (quizId) => {
   }
 };
 
+
 export const addQuestionToQuiz = (quizId, questionId) => {
-  const quiz = Database.quizzes.find((q) => q._id === quizId);
-
-  if (!quiz) {
-    throw new Error(`Quiz with ID ${quizId} not found`);
-  }
-
-  quiz.questionIds = quiz.questionIds || [];
-  quiz.questionIds.push(questionId);
-
-  return quiz;
-};
+    const quiz = Database.quizzes.find((q) => q._id === quizId);
+    if (!quiz) {
+      throw new Error(`Quiz with ID ${quizId} not found.`);
+    }
+  
+    // Initialize questionIds array if not present
+    if (!quiz.questionIds) {
+      quiz.questionIds = [];
+    }
+  
+    quiz.questionIds.push(questionId);
+    return quiz;
+  };
+  

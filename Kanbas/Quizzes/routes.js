@@ -1,5 +1,6 @@
 import quizzes from "../Database/quizzes.js";
 import * as quizzesDao from "./dao.js";
+import * as questionsDao from "../Questions/dao.js"
 
 export default function QuizRoutes(app) {
   // Create a quiz
@@ -64,12 +65,19 @@ export default function QuizRoutes(app) {
     res.send({ success: status });
   });
 
-  // Associate a question with a quiz
-  app.post("/api/quizzes/:quizId/questions/:questionId", (req, res) => {
-    const { quizId, questionId } = req.params;
+
+  app.post("/api/quizzes/:quizId/questions", (req, res) => {
+    const { quizId } = req.params;
+    const questionData = req.body;
+
     try {
-      const quiz = quizzesDao.addQuestionToQuiz(quizId, questionId);
-      res.status(200).json(quiz);
+      // Create the question
+      const newQuestion = questionsDao.createQuestion(questionData);
+
+      // Associate the question with the quiz
+      const updatedQuiz = quizzesDao.addQuestionToQuiz(quizId, newQuestion._id);
+
+      res.status(201).json(newQuestion);
     } catch (error) {
       console.error("Error adding question to quiz:", error.message);
       res.status(500).send({ error: error.message });

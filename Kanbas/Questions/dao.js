@@ -1,5 +1,5 @@
-// questionsDao.js
 import Database from "../Database/index.js";
+
 
 export const createQuestion = (question) => {
   const newQuestion = { ...question, _id: Date.now().toString() };
@@ -35,4 +35,5 @@ export const deleteQuestion = (questionId) => {
   } else {
     return false; // Question not found
   }
+
 };
