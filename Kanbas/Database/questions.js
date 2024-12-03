@@ -153,7 +153,7 @@ export default [
         "answer": [
             { "value": "c", "explanation": "c is correct because..." },
         ],
-        "type": "multi-choice"
+        "type": "Multiple Choice"
     },
     {
         "_id": 13,
@@ -165,7 +165,7 @@ export default [
         "answer": [
             { "value": "d", "explanation": "d is correct because..." },
         ],
-         "type": "multi-choice"
+         "type": "Multiple Choice"
     },
 
     {
@@ -178,7 +178,7 @@ export default [
         "answer": [
             { "value": "e and f", "explanation": "e and f is correct because..."}, 
         ],
-         "type": "multi-choice"
+         "type": "Multiple Choice"
     }
 ]
 
