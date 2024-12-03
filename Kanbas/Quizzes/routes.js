@@ -75,7 +75,7 @@ export default function QuizRoutes(app) {
       const newQuestion = questionsDao.createQuestion(questionData);
 
       // Associate the question with the quiz
-      const updatedQuiz = quizzesDao.addQuestionToQuiz(quizId, newQuestion._id);
+      //  const updatedQuiz = quizzesDao.addQuestionToQuiz(quizId, newQuestion._id);
 
       res.status(201).json(newQuestion);
     } catch (error) {

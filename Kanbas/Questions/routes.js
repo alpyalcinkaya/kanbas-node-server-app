@@ -6,7 +6,7 @@ export default function QuestionsRoutes(app) {
   app.post("/api/questions", (req, res) => {
     const question = req.body;
     try {
-      const newQuestion = questionsDao.createQuestion(question);
+      const newQuestion = questionsDao.stion(question);
       res.status(201).json(newQuestion);
     } catch (error) {
       console.error("Error creating question:", error.message);
@@ -54,16 +54,16 @@ export default function QuestionsRoutes(app) {
   });
 
   // Delete a question
-  app.delete("/api/questions/:questionId", (req, res) => {
-    const { questionId } = req.params;
-    try {
-      const status = questionsDao.deleteQuestion(questionId);
-      res.send({ success: status });
-    } catch (error) {
-      console.error("Error deleting question:", error.message);
-      res.status(404).send({ error: error.message });
-    }
-  });
+//   app.delete("/api/questions/:questionId", (req, res) => {
+//     const { questionId } = req.params;
+//     try {
+//       const status = questionsDao.deleteQuestion(questionId);
+//       res.send({ success: status });
+//     } catch (error) {
+//       console.error("Error deleting question:", error.message);
+//       res.status(404).send({ error: error.message });
+//     }
+//   });
 
 
   app.get("/api/quizzes/:quizId/questions", (req, res) => {
@@ -79,5 +79,28 @@ export default function QuestionsRoutes(app) {
       res.status(404).send({ error: error.message });
     }
   });
+
+// questionsRoutes.js
+app.delete("/api/questions/:questionId", (req, res) => {
+    const { questionId } = req.params;
+    try {
+      console.log(`Received request to delete question with ID: ${questionId}`);
+      
+      const status = questionsDao.deleteQuestion(questionId);
+      
+      if (status) {
+        console.log(`Successfully deleted question with ID: ${questionId}`);
+        res.send({ success: true });
+      } else {
+        console.error(`Failed to delete question with ID: ${questionId}`);
+        res.status(404).send({ error: `Question with ID ${questionId} not found.` });
+      }
+    } catch (error) {
+      console.error("Error deleting question:", error.message);
+      res.status(404).send({ error: error.message });
+    }
+  });
+  
+
 
 }
