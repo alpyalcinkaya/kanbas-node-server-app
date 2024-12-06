@@ -42,9 +42,10 @@ export default function QuestionsRoutes(app) {
 
   // Update a question
   app.put("/api/questions/:questionId/update", (req, res) => {
+    console.log("Route accessed:", req.params.questionId); // Debugging log
     const { questionId } = req.params;
     const questionUpdates = req.body;
-    console.log(questionId, typeof(questionId), "route");
+  
     try {
       const updatedQuestion = questionsDao.updateQuestion(questionId, questionUpdates);
       res.json(updatedQuestion);
@@ -53,6 +54,7 @@ export default function QuestionsRoutes(app) {
       res.status(404).send({ error: error.message });
     }
   });
+  
 
   // Delete a question
 //   app.delete("/api/questions/:questionId", (req, res) => {

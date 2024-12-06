@@ -9,9 +9,9 @@ export default [
         "points": 10,
         "title": "question title 1",
         "question": "This is a test answer: True or Yes",
-        "options": [true, false],
+        "options": ["true", "false"],
         "answer": [
-            { "value": true, "explanation": "True is correct because..." },
+            { "value": "true", "explanation": "True is correct because..." },
         ],
         "type": "True/False"
 
@@ -22,9 +22,9 @@ export default [
         "points": 15,
         "title": "question title 2",
         "question": "This is a test answer: False or No",
-        "options": [true, false],
+        "options": ["true", "false"],
         "answer": [
-            { "value": false, "explanation": "false is correct because..." },
+            { "value": "false", "explanation": "false is correct because..." },
         ],
           "type": "True/False"
     },
@@ -34,12 +34,12 @@ export default [
         "points": 15,
         "title": "question title 3",
         "question": "This is a test, answer: 1",
-        "options": [1, 2],
+        "options": ["1", "2"],
         "answer": [
-            { "value": 1, "explanation": "1 is correct because..." },
+            { "value": "1", "explanation": "1 is correct because..." },
         ],
         "answer": 1,
-          "type": "Fill in the blank"
+          "type": "Fill in the Blank"
     },
     {
         "_id": 4,
@@ -51,7 +51,7 @@ export default [
         "answer": [
             { "value": "Answer", "explanation": "Answer is correct because..." },
         ],
-        "type": "Fill in the blank"
+        "type": "Fill in the Blank"
     },
     {
         "_id": 5,
@@ -63,7 +63,7 @@ export default [
         "answer": [
             { "value": "a", "explanation": "a is correct because..." },
         ],
-        "type": "multi-choice"
+        "type": "Multiple Choice"
     },
     {
         "_id": 6,
@@ -75,7 +75,7 @@ export default [
         "answer": [
             { "value": "b", "explanation": "b is correct because..." },
         ],
-         "type": "multi-choice"
+         "type": "Multiple Choice"
     },
 
     {
@@ -88,7 +88,7 @@ export default [
         "answer": [
             { "value": "a and b", "explanation": "a and b is correct because..."}, 
         ],
-         "type": "multi-choice"
+         "type": "Multiple Choice"
     },
 
 
@@ -129,7 +129,7 @@ export default [
             { "value": 2, "explanation": "2 is correct because..." },
         ],
         "answer": 1,
-          "type": "Fill in the blank"
+          "type": "Fill in the Blank"
     },
     {
         "_id": 11,
@@ -141,7 +141,7 @@ export default [
         "answer": [
             { "value": "3", "explanation": "3 is correct because..." },
         ],
-        "type": "Fill in the blank"
+        "type": "Fill in the Blank"
     },
     {
         "_id": 12,

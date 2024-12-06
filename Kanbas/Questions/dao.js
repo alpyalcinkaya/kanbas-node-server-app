@@ -31,7 +31,7 @@ export const findQuestionsByQuizId = (quizId) => {
 
 export const updateQuestion = (questionId, questionUpdates) => {
   console.log(questionId, typeof(questionId), "dao");
-  const question = Database.questions.find((q) => q._id === Number(questionId));
+  const question = Database.questions.find((q) => String(q._id) === String(questionId));
   console.log(q);
 
   if (!question) {
