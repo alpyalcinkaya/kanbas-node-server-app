@@ -104,18 +104,18 @@ export const addQuestionToQuiz = async (quizId, questionData) => {
 };
 
 
-export const addQuestionToQuiz = (quizId, questionId) => {
-    const quiz = Database.quizzes.find((q) => q._id === quizId);
-    if (!quiz) {
-      throw new Error(`Quiz with ID ${quizId} not found.`);
-    }
+// export const addQuestionToQuiz = (quizId, questionId) => {
+//     const quiz = Database.quizzes.find((q) => q._id === quizId);
+//     if (!quiz) {
+//       throw new Error(`Quiz with ID ${quizId} not found.`);
+//     }
   
-    // Initialize questionIds array if not present
-    if (!quiz.questionIds) {
-      quiz.questionIds = [];
-    }
+//     // Initialize questionIds array if not present
+//     if (!quiz.questionIds) {
+//       quiz.questionIds = [];
+//     }
   
-    quiz.questionIds.push(questionId);
-    return quiz;
-  };
+//     quiz.questionIds.push(questionId);
+//     return quiz;
+//   };
   
