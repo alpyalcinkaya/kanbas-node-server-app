@@ -41,9 +41,10 @@ export default function QuestionsRoutes(app) {
 //   });
 
   // Update a question
-  app.put("/api/questions/:questionId", (req, res) => {
+  app.put("/api/questions/:questionId/update", (req, res) => {
     const { questionId } = req.params;
     const questionUpdates = req.body;
+    console.log(questionId, typeof(questionId), "route");
     try {
       const updatedQuestion = questionsDao.updateQuestion(questionId, questionUpdates);
       res.json(updatedQuestion);
