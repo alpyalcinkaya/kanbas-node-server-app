@@ -42,11 +42,10 @@ export default function QuestionsRoutes(app) {
 
   // Update a question
   app.put("/api/questions/:questionId/update", (req, res) => {
-    console.log("Route accessed:", req.params.questionId); // Debugging log
     const { questionId } = req.params;
     const questionUpdates = req.body;
-  
     try {
+      console.log("Updating question:", questionId, questionUpdates);
       const updatedQuestion = questionsDao.updateQuestion(questionId, questionUpdates);
       res.json(updatedQuestion);
     } catch (error) {
