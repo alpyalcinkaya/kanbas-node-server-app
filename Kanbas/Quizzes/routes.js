@@ -65,8 +65,6 @@ export default function QuizRoutes(app) {
     res.send({ success: status });
   });
 
-<<<<<<< HEAD
-=======
 
   app.post("/api/quizzes/:quizId/questions", (req, res) => {
     const { quizId } = req.params;
@@ -85,41 +83,11 @@ export default function QuizRoutes(app) {
       res.status(500).send({ error: error.message });
     }
   });
->>>>>>> chris-server
 
   app.post("/api/quizzes/:quizId/questions", (req, res) => {
     const { quizId } = req.params;
     const questionData = req.body;
-
-<<<<<<< HEAD
-    try {
-      // Create the question
-      const newQuestion = questionsDao.createQuestion(questionData);
-
-      // Associate the question with the quiz
-      const updatedQuiz = quizzesDao.addQuestionToQuiz(quizId, newQuestion._id);
-
-      res.status(201).json(newQuestion);
-    } catch (error) {
-      console.error("Error adding question to quiz:", error.message);
-      res.status(500).send({ error: error.message });
-    }
   });
-}
-=======
-// app.get('/api/quizzes/:quizId/questions', (req, res) => {
-//   try {
-//     const { quizId } = req.params;
-//     const questions = findQuestionsByQuizId(quizId);
-//     console.log("route for quizzes hit");
-//     if (questions.length === 0) {
-//       return res.status(404).json({ message: 'No questions found for this quiz' });
-//     }
-//     res.json(questions);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
+
 
 }
->>>>>>> chris-server

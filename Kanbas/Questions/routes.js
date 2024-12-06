@@ -6,11 +6,7 @@ export default function QuestionsRoutes(app) {
   app.post("/api/questions", (req, res) => {
     const question = req.body;
     try {
-<<<<<<< HEAD
-      const newQuestion = questionsDao.createQuestion(question);
-=======
       const newQuestion = questionsDao.stion(question);
->>>>>>> chris-server
       res.status(201).json(newQuestion);
     } catch (error) {
       console.error("Error creating question:", error.message);
@@ -30,13 +26,6 @@ export default function QuestionsRoutes(app) {
     }
   });
 
-<<<<<<< HEAD
-  // Update a question
-  app.put("/api/questions/:questionId", (req, res) => {
-    const { questionId } = req.params;
-    const questionUpdates = req.body;
-    try {
-=======
 //    // Get questions by quiz ID
 // app.get("/api/quizzes/:quizId/questions", (req, res) => {
 //     const { quizId } = req.params;
@@ -57,7 +46,6 @@ export default function QuestionsRoutes(app) {
     const questionUpdates = req.body;
     try {
       console.log("Updating question:", questionId, questionUpdates);
->>>>>>> chris-server
       const updatedQuestion = questionsDao.updateQuestion(questionId, questionUpdates);
       res.json(updatedQuestion);
     } catch (error) {
@@ -65,15 +53,6 @@ export default function QuestionsRoutes(app) {
       res.status(404).send({ error: error.message });
     }
   });
-<<<<<<< HEAD
-
-  // Delete a question
-  app.delete("/api/questions/:questionId", (req, res) => {
-    const { questionId } = req.params;
-    try {
-      const status = questionsDao.deleteQuestion(questionId);
-      res.send({ success: status });
-=======
   
 
   // Delete a question
@@ -118,17 +97,12 @@ app.delete("/api/questions/:questionId", (req, res) => {
         console.error(`Failed to delete question with ID: ${questionId}`);
         res.status(404).send({ error: `Question with ID ${questionId} not found.` });
       }
->>>>>>> chris-server
     } catch (error) {
       console.error("Error deleting question:", error.message);
       res.status(404).send({ error: error.message });
     }
   });
-<<<<<<< HEAD
-}
-=======
   
 
 
 }
->>>>>>> chris-server

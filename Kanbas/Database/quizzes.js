@@ -46,8 +46,4 @@ export default [
     published: false,
     questions: [] // Added field
   }
-<<<<<<< HEAD
 ];
-=======
-];
->>>>>>> chris-server
