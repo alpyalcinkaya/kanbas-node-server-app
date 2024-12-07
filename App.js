@@ -15,12 +15,14 @@ import QuestionsRoutes from "./Kanbas/Questions/routes.js"
 
 
 const app = express();
+// Update CORS configuration
 app.use(
   cors({
     credentials: true,
     origin: [
       process.env.NETLIFY_URL || "http://localhost:3000",
-      "https://a5--superb-cupcake-d547e1.netlify.app",
+      "https://group-project-react--superb-cupcake-d547e1.netlify.app",
+      "https://kanbas-node-server-app-group-project.onrender.com"
     ],
   })
 );
