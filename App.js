@@ -13,34 +13,9 @@ import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
 import QuizRoutes from "./Kanbas/Quizzes/routes.js";
 import QuestionsRoutes from "./Kanbas/Questions/routes.js"
 
-
 const app = express();
-// Update CORS configuration
-app.use(
-  cors({
-    credentials: true,
-    origin: [
-      process.env.NETLIFY_URL || "http://localhost:3000",
-      "https://group-project-react--superb-cupcake-d547e1.netlify.app",
-      "https://kanbas-node-server-app-group-project.onrender.com"
-    ],
-  })
-);
 
-// const sessionOptions = {
-//   secret: process.env.SESSION_SECRET || "kanbas",
-//   resave: false,
-//   saveUninitialized: false,
-// };
-// if (process.env.NODE_ENV !== "development") {
-//   sessionOptions.proxy = true;
-//   sessionOptions.cookie = {
-//     sameSite: "none",
-//     secure: true,
-//     domain: process.env.NODE_SERVER_DOMAIN,
-//   };
-// }
-
+// First, set up session
 const sessionOptions = {
   secret: process.env.SESSION_SECRET || 'sessionSecret',
   resave: false,
@@ -49,10 +24,14 @@ const sessionOptions = {
   cookie: {
     secure: false,
     sameSite: 'lax',
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 };
 
+// Session middleware must come before CORS
+app.use(session(sessionOptions));
+
+// Then CORS
 app.use(
   cors({
     credentials: true,
@@ -64,17 +43,22 @@ app.use(
   })
 );
 
-// Add this debugging middleware
-app.use((req, res, next) => {
-  console.log("Session ID:", req.sessionID);
-  console.log("User in Session:", req.session.currentUser);
-  next();
-});
-
-app.use(session(sessionOptions));
-
 app.use(express.json());
 
+// Debug middleware with error handling
+app.use((req, res, next) => {
+  try {
+    console.log("Session ID:", req.sessionID);
+    console.log("Session:", req.session);
+    console.log("User in Session:", req.session?.currentUser || 'No user');
+    next();
+  } catch (error) {
+    console.error("Session middleware error:", error);
+    next();
+  }
+});
+
+// Routes
 HelloRoutes(app);
 CourseRoutes(app);
 Lab5(app);
