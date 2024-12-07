@@ -42,18 +42,35 @@ app.use(
 // }
 
 const sessionOptions = {
-  secret: 'sessionSecret', // Replace with a strong secret key
+  secret: process.env.SESSION_SECRET || 'sessionSecret',
   resave: false,
-  httpOnly: true,
-  saveUninitialized: true,
-
+  saveUninitialized: false,
+  proxy: false,
   cookie: {
-    domain: 'localhost',
-    path: '/',
-    maxAge: 5000 * 60, //5 mnt
-    sameSite: 'lax' // Please use your own value based on requirements.
+    secure: false,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
   }
-}
+};
+
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      process.env.NETLIFY_URL || "http://localhost:3000",
+      "https://group-project-react--superb-cupcake-d547e1.netlify.app",
+      "https://kanbas-node-server-app-group-project.onrender.com"
+    ],
+  })
+);
+
+// Add this debugging middleware
+app.use((req, res, next) => {
+  console.log("Session ID:", req.sessionID);
+  console.log("User in Session:", req.session.currentUser);
+  next();
+});
+
 app.use(session(sessionOptions));
 
 app.use(express.json());
