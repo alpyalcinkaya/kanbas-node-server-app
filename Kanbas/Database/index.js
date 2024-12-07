@@ -5,5 +5,6 @@ import users from "./users.js"
 import enrollments from "./enrollments.js"
 import quizzes from "./quizzes.js";
 import questions from "./questions.js";
+import quizScores from "./quizScores.js";
 
-export default { courses, modules, assignments, users, enrollments, quizzes, questions}; // added default here to fix crashing
+export default { courses, modules, assignments, users, enrollments, quizzes, questions, quizScores }; // added default here to fix crashing

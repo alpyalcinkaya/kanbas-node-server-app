@@ -103,6 +103,43 @@ export const addQuestionToQuiz = async (quizId, questionData) => {
   }
 };
 
+// Save a quiz score
+export const saveQuizScore = (studentId, quizId, score) => {
+  // Check if score already exists
+  const existingScoreIndex = Database.quizScores.findIndex(
+    score => score.studentId === studentId && score.quizId === quizId
+  );
+
+  const scoreData = {
+    studentId,
+    quizId,
+    score,
+    timestamp: new Date().toISOString()
+  };
+
+  if (existingScoreIndex !== -1) {
+    // Update existing score
+    Database.quizScores[existingScoreIndex] = scoreData;
+  } else {
+    // Add new score
+    Database.quizScores.push(scoreData);
+  }
+
+  return scoreData;
+};
+
+
+export const findQuizScoresForStudent = (studentId) => {
+  const scores = Database.quizScores.filter(
+    score => score.studentId === studentId
+  );
+  
+  // Convert array to object with quizId as key
+  return scores.reduce((acc, score) => {
+    acc[score.quizId] = score.score;
+    return acc;
+  }, {});
+};
 
 // export const addQuestionToQuiz = (quizId, questionId) => {
 //     const quiz = Database.quizzes.find((q) => q._id === quizId);

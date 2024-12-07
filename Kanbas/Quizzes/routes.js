@@ -90,4 +90,26 @@ export default function QuizRoutes(app) {
   });
 
 
+  // Save a quiz score
+  app.post("/api/students/:studentId/quiz-scores", (req, res) => {
+    const { studentId } = req.params;
+    const { quizId, score } = req.body;
+    try {
+      const savedScore = quizzesDao.saveQuizScore(studentId, quizId, score);
+      res.json(savedScore);
+    } catch (error) {
+      res.status(500).send({ error: error.message });
+    }
+  });
+
+  // Get all quiz scores for a student
+  app.get("/api/students/:studentId/quiz-scores", (req, res) => {
+    const { studentId } = req.params;
+    try {
+      const scores = quizzesDao.findQuizScoresForStudent(studentId);
+      res.json(scores);
+    } catch (error) {
+      res.status(500).send({ error: error.message });
+    }
+  });
 }
