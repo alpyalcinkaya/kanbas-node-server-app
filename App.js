@@ -20,13 +20,26 @@ const sessionOptions = {
   secret: process.env.SESSION_SECRET || 'sessionSecret',
   resave: false,
   saveUninitialized: false,
-  proxy: false,
+  proxy: true,  
   cookie: {
-    secure: false,
-    sameSite: 'lax',
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    secure: true,
+    sameSite: 'none',
+    httpOnly: true  
   }
 };
+
+app.use(session(sessionOptions));
+
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      process.env.NETLIFY_URL || "http://localhost:3000",
+      "https://group-project-react--superb-cupcake-d547e1.netlify.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"]  // Add this to explicitly allow methods
+  })
+);
 
 // Session middleware must come before CORS
 app.use(session(sessionOptions));

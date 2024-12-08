@@ -73,9 +73,6 @@ export default function UserRoutes(app) {
       instructor: currentUser._id  // Add this line to associate course with faculty
     };
     const newCourse = courseDao.createCourse(courseData);
-    
-    // If you want faculty to also be enrolled in their courses, keep this line
-    // Otherwise you might want to remove it for faculty
     enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
     
     res.json(newCourse);
