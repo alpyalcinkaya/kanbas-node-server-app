@@ -31,5 +31,6 @@ export function findCoursesForEnrolledUser(userId) {
     return course;
   }
   
-  
-  
+  export function findCoursesByInstructor(instructorId) {
+    return Database.courses.filter(course => course.instructor === instructorId);
+  }

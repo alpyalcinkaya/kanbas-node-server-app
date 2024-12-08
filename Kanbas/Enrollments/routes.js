@@ -27,22 +27,25 @@ export default function EnrollmentRoutes(app) {
   app.get("/api/enrollments/:userId/courses", (req, res) => {
     const { userId } = req.params;
     const user = Database.users.find((u) => u._id === userId);
-
+    
     if (!user) {
       res.status(404).send("User not found");
       return;
     }
-
-    if (user.role === "STUDENT") {
-      // Get enrolled courses for the student
-      const enrolledCourses = coursesDao.findCoursesForEnrolledUser(userId);
-      res.json(enrolledCourses);
-    } else if (user.role === "FACULTY") {
-      // Get courses managed by the faculty user
-      const managedCourses = Database.courses.filter(course => course.instructor === userId);
-      res.json(managedCourses);
-    } else {
-      res.status(400).send("Invalid user role");
+  
+    try {
+      if (user.role === "STUDENT") {
+        const enrolledCourses = coursesDao.findCoursesForEnrolledUser(userId);
+        res.json(enrolledCourses);
+      } else if (user.role === "FACULTY") {
+        const managedCourses = coursesDao.findCoursesByInstructor(userId);
+        res.json(managedCourses);
+      } else {
+        res.status(400).send("Invalid user role");
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      res.status(500).json({ message: "Error fetching courses" });
     }
   });
 

@@ -68,10 +68,19 @@ export default function UserRoutes(app) {
 
   const createCourse = (req, res) => {
     const currentUser = req.session["currentUser"];
-    const newCourse = courseDao.createCourse(req.body);
+    const courseData = {
+      ...req.body,
+      instructor: currentUser._id  // Add this line to associate course with faculty
+    };
+    const newCourse = courseDao.createCourse(courseData);
+    
+    // If you want faculty to also be enrolled in their courses, keep this line
+    // Otherwise you might want to remove it for faculty
     enrollmentsDao.enrollUserInCourse(currentUser._id, newCourse._id);
+    
     res.json(newCourse);
   };
+  
   app.post("/api/users/current/courses", createCourse);
 
   app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
@@ -84,6 +93,5 @@ export default function UserRoutes(app) {
   app.post("/api/users/signup", signup);
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
-  app.get("/api/users/profile", profile);
-  // app.post("/api/users/profile", profile);
+  app.post("/api/users/profile", profile);
 }
